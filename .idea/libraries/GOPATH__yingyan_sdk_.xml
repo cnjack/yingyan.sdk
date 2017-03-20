@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="GOPATH &lt;yingyan.sdk&gt;">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../../git.oschina.net" />
+      <root url="file://$PROJECT_DIR$/../.." />
+      <root url="file://$PROJECT_DIR$/../../../code.qschou.com" />
+    </CLASSES>
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../../../git.oschina.net" />
+      <root url="file://$PROJECT_DIR$/../.." />
+      <root url="file://$PROJECT_DIR$/../../../code.qschou.com" />
+    </SOURCES>
+    <excluded>
+      <root url="file://$PROJECT_DIR$" />
+    </excluded>
+  </library>
+</component>
