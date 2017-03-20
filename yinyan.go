@@ -4,33 +4,31 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
-	"time"
+	"strconv"
 )
 
 type s struct {
 	ak  string
 	sk  string
-	h   *http.Client
-	req *http.Request
+	serviceID int
 	s   bool
 }
 
 // visit http://lbsyun.baidu.com/apiconsole/key/ 获取ak
 // 如果设置的白名单则设置sk ""
-func NewClient(ak, sk string) *s {
+func NewClient(ak, sk string,serviceID int) *s {
 	return &s{
 		sk: sk,
 		ak: ak,
-		h: &http.Client{
-			Timeout: 8 * time.Second,
-		},
 		s: true,
+		serviceID:serviceID,
 	}
 }
 
 func (serv *s) Post(path string, param map[string]string) (body []byte, err error) {
 	data := url.Values{}
 	data.Add("ak", serv.ak)
+	data.Add("service_id", strconv.Itoa(serv.serviceID))
 	for k, v := range param {
 		data.Add(k, v)
 	}

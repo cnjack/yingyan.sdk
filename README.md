@@ -17,8 +17,8 @@
  - [ ] listcolumn
 
 ### Track
-- [ ] addpoint   
-- [ ] addpoints   
+- [x] addpoint
+- [x] addpoints
 - [ ] getlatestpoint   
 - [ ] getdistance   
 - [ ] gettrack   

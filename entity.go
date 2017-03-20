@@ -2,12 +2,10 @@ package yingyan
 
 import (
 	"encoding/json"
-	"strconv"
 )
 
-func (serv *s) EntityAdd(serviceID int, entityName, entityDesc string) (r *CommonResp, err error) {
+func (serv *s) EntityAdd(entityName, entityDesc string) (r *CommonResp, err error) {
 	param := map[string]string{
-		"service_id":  strconv.Itoa(serviceID),
 		"entity_name": entityName,
 		"entity_desc": entityDesc,
 	}
@@ -23,9 +21,8 @@ func (serv *s) EntityAdd(serviceID int, entityName, entityDesc string) (r *Commo
 	return r, nil
 }
 
-func (serv *s) EntityUpdate(serviceID int, entityName, entityDesc string) (r *CommonResp, err error) {
+func (serv *s) EntityUpdate(entityName, entityDesc string) (r *CommonResp, err error) {
 	param := map[string]string{
-		"service_id":  strconv.Itoa(serviceID),
 		"entity_name": entityName,
 		"entity_desc": entityDesc,
 	}
@@ -41,9 +38,8 @@ func (serv *s) EntityUpdate(serviceID int, entityName, entityDesc string) (r *Co
 	return r, nil
 }
 
-func (serv *s) EntityDelete(serviceID int, entityName string) (r *CommonResp, err error) {
+func (serv *s) EntityDelete(entityName string) (r *CommonResp, err error) {
 	param := map[string]string{
-		"service_id":  strconv.Itoa(serviceID),
 		"entity_name": entityName,
 	}
 	respByte, err := serv.Post(entityDeletePath, param)
