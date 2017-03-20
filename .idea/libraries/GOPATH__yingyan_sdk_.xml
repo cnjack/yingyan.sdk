@@ -1,14 +1,26 @@
 <component name="libraryTable">
   <library name="GOPATH &lt;yingyan.sdk&gt;">
     <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../../git.apache.org" />
+      <root url="file://$PROJECT_DIR$/../../../golang.org" />
       <root url="file://$PROJECT_DIR$/../../../git.oschina.net" />
       <root url="file://$PROJECT_DIR$/../.." />
+      <root url="file://$PROJECT_DIR$/../../../google.golang.org" />
+      <root url="file://$PROJECT_DIR$/../../../gopkg.in" />
       <root url="file://$PROJECT_DIR$/../../../code.qschou.com" />
+      <root url="file://$PROJECT_DIR$/../../../git.ngs.tech" />
+      <root url="file://$PROJECT_DIR$/../../../code.aliyun.com" />
     </CLASSES>
     <SOURCES>
+      <root url="file://$PROJECT_DIR$/../../../git.apache.org" />
+      <root url="file://$PROJECT_DIR$/../../../golang.org" />
       <root url="file://$PROJECT_DIR$/../../../git.oschina.net" />
       <root url="file://$PROJECT_DIR$/../.." />
+      <root url="file://$PROJECT_DIR$/../../../google.golang.org" />
+      <root url="file://$PROJECT_DIR$/../../../gopkg.in" />
       <root url="file://$PROJECT_DIR$/../../../code.qschou.com" />
+      <root url="file://$PROJECT_DIR$/../../../git.ngs.tech" />
+      <root url="file://$PROJECT_DIR$/../../../code.aliyun.com" />
     </SOURCES>
     <excluded>
       <root url="file://$PROJECT_DIR$" />
