@@ -43,6 +43,9 @@ func (p *ProcessOption) ToData() string {
 }
 
 func (serv *s) GetLatestPoint(entityName string, po *ProcessOption, coordType CoordTypeInput) (r *LatestPointResp, err error) {
+	if coordType == "" {
+		coordType = BaiDuCoordType
+	}
 	param := map[string]string{
 		"entity_name":       entityName,
 		"process_option":    po.ToData(),

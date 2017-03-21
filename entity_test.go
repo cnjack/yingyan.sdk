@@ -1,6 +1,7 @@
 package yingyan_test
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/cnjack/yingyan.sdk"
 	"testing"
@@ -32,4 +33,14 @@ func TestS_EntityDelete(t *testing.T) {
 	}
 	fmt.Println(body)
 
+}
+
+func TestS_EntityList(t *testing.T) {
+	client := yingyan.NewClient("do0znBH8Du2YflrDtZ6osFGVXOEG3osi", "fOBSnqpZyppQ2ImXP7HfqFeeY17MouzZ", 135928)
+	body, err := client.EntityList(&yingyan.EntityListFilter{}, yingyan.BaiDuCoordType, 1, 100)
+	if err != nil {
+		t.Error("EntityAdd err :", err.Error())
+	}
+	bodyByte, _ := json.Marshal(body)
+	fmt.Println(string(bodyByte))
 }
