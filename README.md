@@ -11,7 +11,7 @@
 - [x] add   
 - [x] update   
 - [x] delete   
-- [ ] list   
+- [x] list   
 - [ ] search   
 - [ ] boundsearch   
 - [ ] aroundsearch  
