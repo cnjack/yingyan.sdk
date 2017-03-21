@@ -12,9 +12,9 @@
 - [x] update   
 - [x] delete   
 - [x] list   
-- [ ] search   
-- [ ] boundsearch   
-- [ ] aroundsearch  
+- [x] search   
+- [x] boundsearch   
+- [x] aroundsearch  
  - column
  - [ ] addcolumn
  - [ ] deletecolumn
