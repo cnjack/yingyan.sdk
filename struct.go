@@ -17,3 +17,8 @@ type LatestPointResp struct {
 		Floor     string  `json:"floor"`
 	} `json:"latest_point,omitempty"`
 }
+
+type DistanceResp struct {
+	CommonResp
+	Distance float64 `json:"distance"`
+}

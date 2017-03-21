@@ -1,27 +1,28 @@
 package yingyan
 
 import (
-	"fmt"
 	"encoding/json"
+	"fmt"
+	"strconv"
 )
 
 type Denoise int
 
-var (
+const (
 	NotNeedDenoise Denoise = 0
 	NeedDenoise    Denoise = 1
 )
 
 type MapMatch int
 
-var (
+const (
 	NotNeedMapMatch MapMatch = 0
 	NeedMapMatch    MapMatch = 1
 )
 
 type TransportMode string
 
-var (
+const (
 	DrivingTransportMode TransportMode = `driving`
 	RidingTransportMode  TransportMode = `riding`
 	WalkingTransportMode TransportMode = `walking`
@@ -42,11 +43,10 @@ func (p *ProcessOption) ToData() string {
 }
 
 func (serv *s) GetLatestPoint(entityName string, po *ProcessOption, coordType CoordTypeInput) (r *LatestPointResp, err error) {
-	fmt.Println(po.ToData())
 	param := map[string]string{
-		"entity_name": entityName,
-		"process_option": po.ToData(),
-		"coord_type_output":string(coordType),
+		"entity_name":       entityName,
+		"process_option":    po.ToData(),
+		"coord_type_output": string(coordType),
 	}
 	respByte, err := serv.Get(trackGetLatestPoint, param)
 	if err != nil {
@@ -60,3 +60,40 @@ func (serv *s) GetLatestPoint(entityName string, po *ProcessOption, coordType Co
 	return r, nil
 }
 
+type SupplementMode string
+
+const (
+	NoSupplement       SupplementMode = `no_supplement`
+	StraightSupplement SupplementMode = `straight`
+	DrivingSupplement  SupplementMode = `driving`
+	RidingSupplement   SupplementMode = `riding`
+	WalkingSupplement  SupplementMode = `walking`
+)
+
+func (serv *s) GetDistance(entityName string, isProcessed bool, startTime, endTime int64, po *ProcessOption, supplementMode SupplementMode) (r *DistanceResp, err error) {
+	if supplementMode == "" {
+		supplementMode = NoSupplement
+	}
+	isProcessedString := "0"
+	if isProcessed {
+		isProcessedString = "1"
+	}
+	param := map[string]string{
+		"entity_name":     entityName,
+		"is_processed":    isProcessedString,
+		"start_time":      strconv.FormatInt(startTime, 10),
+		"end_time":        strconv.FormatInt(endTime, 10),
+		"process_option":  po.ToData(),
+		"supplement_mode": string(supplementMode),
+	}
+	respByte, err := serv.Get(trackGetLatestPoint, param)
+	if err != nil {
+		return nil, err
+	}
+	r = &DistanceResp{}
+	err = json.Unmarshal(respByte, r)
+	if err != nil {
+		return nil, err
+	}
+	return r, nil
+}
