@@ -5,6 +5,8 @@ import (
 	"testing"
 	"time"
 
+	"encoding/json"
+
 	"github.com/cnjack/yingyan.sdk"
 )
 
@@ -25,4 +27,15 @@ func TestS_GetDistance(t *testing.T) {
 		t.Error("EntityAdd err :", err.Error())
 	}
 	fmt.Println(body)
+}
+
+func TestS_GetTrack(t *testing.T) {
+	start := time.Now().Unix() - 6300
+	client := yingyan.NewClient("do0znBH8Du2YflrDtZ6osFGVXOEG3osi", "fOBSnqpZyppQ2ImXP7HfqFeeY17MouzZ", 135928)
+	body, err := client.GetTrack("run_1", true, start, time.Now().Unix(), &yingyan.ProcessOption{}, yingyan.NoSupplement, yingyan.BaiDuCoordType, yingyan.AscSortType, 1, 100)
+	if err != nil {
+		t.Error("EntityAdd err :", err.Error())
+	}
+	bodyByte, _ := json.Marshal(body)
+	fmt.Println(string(bodyByte))
 }

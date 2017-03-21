@@ -81,7 +81,7 @@ func (f *EntityListFilter) ToData() string {
 	return strings.Join(params, "|")
 }
 
-func (serv *s) EntityList(filter *EntityListFilter, coordType CoordTypeInput, pageIndex, pageSize int) (r *EntitiesListResp, err error) {
+func (serv *s) EntityList(filter *EntityListFilter, coordType CoordType, pageIndex, pageSize int) (r *EntitiesListResp, err error) {
 	if coordType == "" {
 		coordType = BaiDuCoordType
 	}

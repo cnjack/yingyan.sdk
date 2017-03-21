@@ -42,7 +42,7 @@ func (p *ProcessOption) ToData() string {
 	return fmt.Sprintf("need_denoise=%d,need_mapmatch=%d,radius_threshold=%d,transport_mode=%s", p.Denoise, p.MapMatch, p.RadiusThreshold, p.TransportMode)
 }
 
-func (serv *s) GetLatestPoint(entityName string, po *ProcessOption, coordType CoordTypeInput) (r *LatestPointResp, err error) {
+func (serv *s) GetLatestPoint(entityName string, po *ProcessOption, coordType CoordType) (r *LatestPointResp, err error) {
 	if coordType == "" {
 		coordType = BaiDuCoordType
 	}
@@ -89,11 +89,62 @@ func (serv *s) GetDistance(entityName string, isProcessed bool, startTime, endTi
 		"process_option":  po.ToData(),
 		"supplement_mode": string(supplementMode),
 	}
-	respByte, err := serv.Get(trackGetLatestPoint, param)
+	respByte, err := serv.Get(trackGetDistance, param)
 	if err != nil {
 		return nil, err
 	}
 	r = &DistanceResp{}
+	err = json.Unmarshal(respByte, r)
+	if err != nil {
+		return nil, err
+	}
+	return r, nil
+}
+
+type SortType string
+
+var (
+	DescSortType SortType = `desc`
+	AscSortType  SortType = `asc`
+)
+
+func (serv *s) GetTrack(entityName string, isProcessed bool, startTime, endTime int64, po *ProcessOption, supplementMode SupplementMode, coordType CoordType, sortType SortType, pageIndex, pageSize int) (r *GetTrackResp, err error) {
+	if supplementMode == "" {
+		supplementMode = NoSupplement
+	}
+	if coordType == "" {
+		coordType = BaiDuCoordType
+	}
+	isProcessedString := "0"
+	if isProcessed {
+		isProcessedString = "1"
+	}
+	if pageIndex <= 0 {
+		pageIndex = 1
+	}
+	if sortType != DescSortType {
+		sortType = AscSortType
+	}
+	if pageSize <= 0 || pageSize > 1000 {
+		pageSize = 100
+	}
+	param := map[string]string{
+		"entity_name":       entityName,
+		"is_processed":      isProcessedString,
+		"start_time":        strconv.FormatInt(startTime, 10),
+		"end_time":          strconv.FormatInt(endTime, 10),
+		"process_option":    po.ToData(),
+		"sort_type":         string(sortType),
+		"supplement_mode":   string(supplementMode),
+		"coord_type_output": string(coordType),
+		"page_index":        strconv.Itoa(pageIndex),
+		"page_size":         strconv.Itoa(pageSize),
+	}
+	respByte, err := serv.Get(trackGetTrack, param)
+	if err != nil {
+		return nil, err
+	}
+	r = &GetTrackResp{}
 	err = json.Unmarshal(respByte, r)
 	if err != nil {
 		return nil, err

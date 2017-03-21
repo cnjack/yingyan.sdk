@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-func (serv *s) EntitySearch(query string, filter *EntityListFilter, coordType CoordTypeInput, pageIndex, pageSize int) (r *EntitiesListResp, err error) {
+func (serv *s) EntitySearch(query string, filter *EntityListFilter, coordType CoordType, pageIndex, pageSize int) (r *EntitiesListResp, err error) {
 	if coordType == "" {
 		coordType = BaiDuCoordType
 	}
@@ -58,7 +58,7 @@ func (b *Bounds) ToData() (string, error) {
 }
 
 // 根据矩形地理范围搜索entity，并返回实时位置
-func (serv *s) EntityBoundSearch(bounds *Bounds, filter *EntityListFilter, coordType CoordTypeInput, pageIndex, pageSize int) (r *EntitiesListResp, err error) {
+func (serv *s) EntityBoundSearch(bounds *Bounds, filter *EntityListFilter, coordType CoordType, pageIndex, pageSize int) (r *EntitiesListResp, err error) {
 	if coordType == "" {
 		coordType = BaiDuCoordType
 	}
@@ -93,7 +93,7 @@ func (serv *s) EntityBoundSearch(bounds *Bounds, filter *EntityListFilter, coord
 	return r, nil
 }
 
-func (serv *s) EntityRoundSearch(center Point, radius int, filter *EntityListFilter, coordType CoordTypeInput, pageIndex, pageSize int) (r *EntitiesListResp, err error) {
+func (serv *s) EntityRoundSearch(center Point, radius int, filter *EntityListFilter, coordType CoordType, pageIndex, pageSize int) (r *EntitiesListResp, err error) {
 	if coordType == "" {
 		coordType = BaiDuCoordType
 	}

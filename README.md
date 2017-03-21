@@ -25,7 +25,7 @@
 - [x] addpoints
 - [x] getlatestpoint   
 - [x] getdistance   
-- [ ] gettrack   
+- [x] gettrack   
 - column
  - [ ] addcolumn
  - [ ] deletecolumn

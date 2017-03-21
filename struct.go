@@ -29,11 +29,11 @@ type CommonResp struct {
 }
 
 type EntityResp struct {
-	EntityName     string       `json:"entity_name"`
-	EntityDesc     string       `json:"entity_desc"`
-	ModifyTime     Time         `json:"modify_time"`
-	CreateTime     Time         `json:"create_time"`
-	LatestLocation *LatestPoint `json:"latest_point,omitempty"`
+	EntityName     string     `json:"entity_name"`
+	EntityDesc     string     `json:"entity_desc"`
+	ModifyTime     Time       `json:"modify_time"`
+	CreateTime     Time       `json:"create_time"`
+	LatestLocation *PointInfo `json:"latest_point,omitempty"`
 }
 
 type EntitiesListResp struct {
@@ -43,7 +43,7 @@ type EntitiesListResp struct {
 	Entities []*EntityResp `json:"entities,omitempty"`
 }
 
-type LatestPoint struct {
+type PointInfo struct {
 	Latitude  float64 `json:"latitude"`
 	Longitude float64 `json:"longitude"`
 	LocTime   int64   `json:"loc_time"`
@@ -52,13 +52,30 @@ type LatestPoint struct {
 	Height    float64 `json:"height"`
 	Floor     string  `json:"floor"`
 }
+type SimplePointInfo struct {
+	Latitude  float64 `json:"latitude"`
+	Longitude float64 `json:"longitude"`
+	LocTime   int64   `json:"loc_time"`
+	CoordType string  `json:"coord_type"`
+}
 
 type LatestPointResp struct {
 	CommonResp
-	LatestPoint *LatestPoint `json:"latest_point,omitempty"`
+	LatestPoint *PointInfo `json:"latest_point,omitempty"`
 }
 
 type DistanceResp struct {
 	CommonResp
 	Distance float64 `json:"distance"`
+}
+
+type GetTrackResp struct {
+	CommonResp
+	Total        int              `json:"total"`
+	Size         int64            `json:"size"`
+	Distance     float64          `json:"distance"`
+	TollDistance float64          `json:"toll_distance"`
+	StartPoint   *SimplePointInfo `json:"start_point,omitempty"`
+	EndPoint     *SimplePointInfo `json:"end_point,omitempty"`
+	Points       []*PointInfo     `json:"points,omitempty"`
 }
