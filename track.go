@@ -3,22 +3,30 @@ package yingyan
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"strconv"
 	"time"
-	"fmt"
 )
 
 type PointData struct {
-	EntityName     string  `json:"entity_name"`
-	Latitude       float64 `json:"latitude"`
-	Longitude      float64 `json:"longitude"`
-	LocTime        int64   `json:"loc_time"`
-	CoordTypeInput string  `json:"coord_type_input"` //坐标类型	 wgs84 GPS坐标 | gcj02 国测局加密坐标 | bd09ll 百度经纬度坐标
-	Speed          float64 `json:"speed"`            //非必须
-	Direction      int     `json:"direction"`        // 非必须 0 正北 顺时针
-	Height         float64 `json:"height"`           // 非必须
-	Radius         float64 `json:"radius"`           //非必须 定位精度，GPS或定位SDK返回的数值 定位精度，GPS或定位SDK返回的值
+	EntityName     string         `json:"entity_name"`
+	Latitude       float64        `json:"latitude"`
+	Longitude      float64        `json:"longitude"`
+	LocTime        int64          `json:"loc_time"`
+	CoordTypeInput CoordTypeInput `json:"coord_type_input"` //坐标类型	 wgs84 GPS坐标 | gcj02 国测局加密坐标 | bd09ll 百度经纬度坐标
+	Speed          float64        `json:"speed"`            //非必须
+	Direction      int            `json:"direction"`        // 非必须 0 正北 顺时针
+	Height         float64        `json:"height"`           // 非必须
+	Radius         float64        `json:"radius"`           //非必须 定位精度，GPS或定位SDK返回的数值 定位精度，GPS或定位SDK返回的值
 }
+
+type CoordTypeInput string
+
+var (
+	GPSCoordType   CoordTypeInput = `wgs84`
+	GcjCoordType   CoordTypeInput = `gcj02`
+	BaiDuCoordType CoordTypeInput = `bd09ll`
+)
 
 func (serv *s) AddPoint(pointData *PointData) (r *CommonResp, err error) {
 	param := map[string]string{
@@ -26,7 +34,7 @@ func (serv *s) AddPoint(pointData *PointData) (r *CommonResp, err error) {
 		"latitude":         strconv.FormatFloat(pointData.Latitude, 'f', 8, 64),
 		"longitude":        strconv.FormatFloat(pointData.Longitude, 'f', 8, 64),
 		"loc_time":         strconv.FormatInt(time.Now().Unix(), 10),
-		"coord_type_input": pointData.CoordTypeInput,
+		"coord_type_input": string(pointData.CoordTypeInput),
 	}
 	if pointData.LocTime != 0 {
 		param["latitude"] = strconv.FormatInt(pointData.LocTime, 10)

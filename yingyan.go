@@ -43,3 +43,22 @@ func (serv *s) Post(path string, param map[string]string) (body []byte, err erro
 	defer resp.Body.Close()
 	return ioutil.ReadAll(resp.Body)
 }
+
+func (serv *s) Get(path string, param map[string]string) (body []byte, err error) {
+	data := url.Values{}
+	data.Add("ak", serv.ak)
+	data.Add("service_id", strconv.Itoa(serv.serviceID))
+	for k, v := range param {
+		data.Add(k, v)
+	}
+	sn := serv.sign(path, &data)
+	if sn != "" {
+		data.Add("sn", sn)
+	}
+	resp, err := http.Get(apiRootPath+path + "?" + data.Encode())
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	return ioutil.ReadAll(resp.Body)
+}

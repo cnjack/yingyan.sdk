@@ -13,7 +13,7 @@ func TestS_AddPoint(t *testing.T) {
 		EntityName:     "run_1",
 		Latitude:       39.848434,
 		Longitude:      116.492943,
-		CoordTypeInput: "wgs84",
+		CoordTypeInput: yingyan.GPSCoordType,
 	})
 	if err != nil {
 		t.Error("EntityAdd err :", err.Error())
@@ -29,14 +29,14 @@ func TestS_AddPoints(t *testing.T) {
 		Latitude:       39.845434,
 		LocTime:        time.Now().Unix(),
 		Longitude:      116.442943,
-		CoordTypeInput: "wgs84",
+		CoordTypeInput: yingyan.GPSCoordType,
 	})
 	params = append(params, &yingyan.PointData{
 		EntityName:     "run_1",
 		Latitude:       39.845534,
 		LocTime:        time.Now().Unix() - 60,
 		Longitude:      116.495343,
-		CoordTypeInput: "wgs84",
+		CoordTypeInput: yingyan.GPSCoordType,
 	})
 	body, err := client.AddPoints(params)
 	if err != nil {

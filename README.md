@@ -23,7 +23,7 @@
 ### Track
 - [x] addpoint
 - [x] addpoints
-- [ ] getlatestpoint   
+- [x] getlatestpoint   
 - [ ] getdistance   
 - [ ] gettrack   
 - column

@@ -7,6 +7,7 @@ const (
 	entityDeletePath = `/api/v3/entity/delete`
 	entityUpdatePath = `/api/v3/entity/update`
 
-	trackAddPoint  = `/api/v3/track/addpoint`
-	trackAddPoints = `/api/v3/track/addpoints`
+	trackAddPoint       = `/api/v3/track/addpoint`
+	trackAddPoints      = `/api/v3/track/addpoints`
+	trackGetLatestPoint = `/api/v3/track/getlatestpoint`
 )
