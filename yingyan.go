@@ -8,20 +8,20 @@ import (
 )
 
 type s struct {
-	ak  string
-	sk  string
+	ak        string
+	sk        string
 	serviceID int
-	s   bool
+	s         bool
 }
 
 // visit http://lbsyun.baidu.com/apiconsole/key/ 获取ak
 // 如果设置的白名单则设置sk ""
-func NewClient(ak, sk string,serviceID int) *s {
+func NewClient(ak, sk string, serviceID int) *s {
 	return &s{
-		sk: sk,
-		ak: ak,
-		s: true,
-		serviceID:serviceID,
+		sk:        sk,
+		ak:        ak,
+		s:         true,
+		serviceID: serviceID,
 	}
 }
 
@@ -55,7 +55,7 @@ func (serv *s) Get(path string, param map[string]string) (body []byte, err error
 	if sn != "" {
 		data.Add("sn", sn)
 	}
-	resp, err := http.Get(apiRootPath+path + "?" + data.Encode())
+	resp, err := http.Get(apiRootPath + path + "?" + data.Encode())
 	if err != nil {
 		return nil, err
 	}

@@ -3,8 +3,9 @@ package yingyan_test
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/cnjack/yingyan.sdk"
 	"testing"
+
+	"github.com/cnjack/yingyan.sdk"
 )
 
 func TestS_EntityAdd(t *testing.T) {

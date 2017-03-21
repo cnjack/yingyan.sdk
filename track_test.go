@@ -2,9 +2,10 @@ package yingyan_test
 
 import (
 	"fmt"
-	"github.com/cnjack/yingyan.sdk"
 	"testing"
 	"time"
+
+	"github.com/cnjack/yingyan.sdk"
 )
 
 func TestS_AddPoint(t *testing.T) {

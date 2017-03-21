@@ -75,8 +75,8 @@ func (f *EntityListFilter) ToData() string {
 		param["inactive_time"] = strconv.FormatInt(f.InactiveTime, 10)
 	}
 	var params []string
-	for k,v := range param {
-		params = append(params, k + "=" + v)
+	for k, v := range param {
+		params = append(params, k+"="+v)
 	}
 	return strings.Join(params, "|")
 }
