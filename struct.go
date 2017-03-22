@@ -55,8 +55,8 @@ type PointInfo struct {
 type SimplePointInfo struct {
 	Latitude  float64 `json:"latitude"`
 	Longitude float64 `json:"longitude"`
-	LocTime   int64   `json:"loc_time"`
-	CoordType string  `json:"coord_type"`
+	LocTime   int64   `json:"loc_time,omitempty"`
+	CoordType string  `json:"coord_type,omitempty"`
 }
 
 type LatestPointResp struct {
@@ -78,4 +78,16 @@ type GetTrackResp struct {
 	StartPoint   *SimplePointInfo `json:"start_point,omitempty"`
 	EndPoint     *SimplePointInfo `json:"end_point,omitempty"`
 	Points       []*PointInfo     `json:"points,omitempty"`
+}
+
+type StayPointResp struct {
+	CommonResp
+	StaypointNum int          `json:"staypoint_num"`
+	stay_points  []*StayPoint `json:"stay_points,omitempty"`
+}
+
+type StayPoint struct {
+	StartTime int64            `json:"start_time"`
+	EndTime   int64            `json:"end_time"`
+	StayPoint *SimplePointInfo `json:"stay_point"`
 }
