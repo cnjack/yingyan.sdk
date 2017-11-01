@@ -6,12 +6,12 @@ import (
 	"strings"
 )
 
-func (serv *s) EntityAdd(entityName, entityDesc string) (r *CommonResp, err error) {
+func (c *Client) EntityAdd(entityName, entityDesc string) (r *CommonResp, err error) {
 	param := map[string]string{
 		"entity_name": entityName,
 		"entity_desc": entityDesc,
 	}
-	respByte, err := serv.Post(entityAddPath, param)
+	respByte, err := c.Post(entityAddPath, param)
 	if err != nil {
 		return nil, err
 	}
@@ -23,12 +23,12 @@ func (serv *s) EntityAdd(entityName, entityDesc string) (r *CommonResp, err erro
 	return r, nil
 }
 
-func (serv *s) EntityUpdate(entityName, entityDesc string) (r *CommonResp, err error) {
+func (c *Client) EntityUpdate(entityName, entityDesc string) (r *CommonResp, err error) {
 	param := map[string]string{
 		"entity_name": entityName,
 		"entity_desc": entityDesc,
 	}
-	respByte, err := serv.Post(entityUpdatePath, param)
+	respByte, err := c.Post(entityUpdatePath, param)
 	if err != nil {
 		return nil, err
 	}
@@ -40,11 +40,11 @@ func (serv *s) EntityUpdate(entityName, entityDesc string) (r *CommonResp, err e
 	return r, nil
 }
 
-func (serv *s) EntityDelete(entityName string) (r *CommonResp, err error) {
+func (c *Client) EntityDelete(entityName string) (r *CommonResp, err error) {
 	param := map[string]string{
 		"entity_name": entityName,
 	}
-	respByte, err := serv.Post(entityDeletePath, param)
+	respByte, err := c.Post(entityDeletePath, param)
 	if err != nil {
 		return nil, err
 	}
@@ -81,7 +81,7 @@ func (f *EntityListFilter) ToData() string {
 	return strings.Join(params, "|")
 }
 
-func (serv *s) EntityList(filter *EntityListFilter, coordType CoordType, pageIndex, pageSize int) (r *EntitiesListResp, err error) {
+func (c *Client) EntityList(filter *EntityListFilter, coordType CoordType, pageIndex, pageSize int) (r *EntitiesListResp, err error) {
 	if coordType == "" {
 		coordType = BaiDuCoordType
 	}
@@ -100,7 +100,7 @@ func (serv *s) EntityList(filter *EntityListFilter, coordType CoordType, pageInd
 	if filterString != "" {
 		param["filter"] = filterString
 	}
-	respByte, err := serv.Get(entityList, param)
+	respByte, err := c.Get(entityList, param)
 	if err != nil {
 		return nil, err
 	}

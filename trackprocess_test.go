@@ -1,11 +1,10 @@
 package yingyan_test
 
 import (
+	"encoding/json"
 	"fmt"
 	"testing"
 	"time"
-
-	"encoding/json"
 
 	"github.com/cnjack/yingyan.sdk"
 )

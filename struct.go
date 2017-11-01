@@ -83,7 +83,7 @@ type GetTrackResp struct {
 type StayPointResp struct {
 	CommonResp
 	StaypointNum int          `json:"staypoint_num"`
-	stay_points  []*StayPoint `json:"stay_points,omitempty"`
+	StayPoints   []*StayPoint `json:"stay_points,omitempty"`
 }
 
 type StayPoint struct {

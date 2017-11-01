@@ -42,7 +42,7 @@ func (p *ProcessOption) ToData() string {
 	return fmt.Sprintf("need_denoise=%d,need_mapmatch=%d,radius_threshold=%d,transport_mode=%s", p.Denoise, p.MapMatch, p.RadiusThreshold, p.TransportMode)
 }
 
-func (serv *s) GetLatestPoint(entityName string, po *ProcessOption, coordType CoordType) (r *LatestPointResp, err error) {
+func (serv *Client) GetLatestPoint(entityName string, po *ProcessOption, coordType CoordType) (r *LatestPointResp, err error) {
 	if coordType == "" {
 		coordType = BaiDuCoordType
 	}
@@ -73,7 +73,7 @@ const (
 	WalkingSupplement  SupplementMode = `walking`
 )
 
-func (serv *s) GetDistance(entityName string, isProcessed bool, startTime, endTime int64, po *ProcessOption, supplementMode SupplementMode) (r *DistanceResp, err error) {
+func (c *Client) GetDistance(entityName string, isProcessed bool, startTime, endTime int64, po *ProcessOption, supplementMode SupplementMode) (r *DistanceResp, err error) {
 	if supplementMode == "" {
 		supplementMode = NoSupplement
 	}
@@ -89,7 +89,7 @@ func (serv *s) GetDistance(entityName string, isProcessed bool, startTime, endTi
 		"process_option":  po.ToData(),
 		"supplement_mode": string(supplementMode),
 	}
-	respByte, err := serv.Get(trackGetDistance, param)
+	respByte, err := c.Get(trackGetDistance, param)
 	if err != nil {
 		return nil, err
 	}
@@ -108,7 +108,7 @@ var (
 	AscSortType  SortType = `asc`
 )
 
-func (serv *s) GetTrack(entityName string, isProcessed bool, startTime, endTime int64, po *ProcessOption, supplementMode SupplementMode, coordType CoordType, sortType SortType, pageIndex, pageSize int) (r *GetTrackResp, err error) {
+func (serv *Client) GetTrack(entityName string, isProcessed bool, startTime, endTime int64, po *ProcessOption, supplementMode SupplementMode, coordType CoordType, sortType SortType, pageIndex, pageSize int) (r *GetTrackResp, err error) {
 	if supplementMode == "" {
 		supplementMode = NoSupplement
 	}

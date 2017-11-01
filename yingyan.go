@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-type s struct {
+type Client struct {
 	ak        string
 	sk        string
 	serviceID int
@@ -16,8 +16,8 @@ type s struct {
 
 // visit http://lbsyun.baidu.com/apiconsole/key/ 获取ak
 // 如果设置的白名单则设置sk ""
-func NewClient(ak, sk string, serviceID int) *s {
-	return &s{
+func NewClient(ak, sk string, serviceID int) *Client {
+	return &Client{
 		sk:        sk,
 		ak:        ak,
 		s:         true,
@@ -25,7 +25,7 @@ func NewClient(ak, sk string, serviceID int) *s {
 	}
 }
 
-func (serv *s) Post(path string, param map[string]string) (body []byte, err error) {
+func (serv *Client) Post(path string, param map[string]string) (body []byte, err error) {
 	data := url.Values{}
 	data.Add("ak", serv.ak)
 	data.Add("service_id", strconv.Itoa(serv.serviceID))
@@ -44,7 +44,7 @@ func (serv *s) Post(path string, param map[string]string) (body []byte, err erro
 	return ioutil.ReadAll(resp.Body)
 }
 
-func (serv *s) Get(path string, param map[string]string) (body []byte, err error) {
+func (serv *Client) Get(path string, param map[string]string) (body []byte, err error) {
 	data := url.Values{}
 	data.Add("ak", serv.ak)
 	data.Add("service_id", strconv.Itoa(serv.serviceID))

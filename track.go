@@ -28,7 +28,7 @@ var (
 	BaiDuCoordType CoordType = `bd09ll`
 )
 
-func (serv *s) AddPoint(pointData *PointData) (r *CommonResp, err error) {
+func (c *Client) AddPoint(pointData *PointData) (r *CommonResp, err error) {
 	param := map[string]string{
 		"entity_name":      pointData.EntityName,
 		"latitude":         strconv.FormatFloat(pointData.Latitude, 'f', 8, 64),
@@ -51,7 +51,7 @@ func (serv *s) AddPoint(pointData *PointData) (r *CommonResp, err error) {
 	if pointData.Radius != 0 {
 		param["radius"] = strconv.FormatFloat(pointData.Radius, 'f', 2, 64)
 	}
-	respByte, err := serv.Post(trackAddPoint, param)
+	respByte, err := c.Post(trackAddPoint, param)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ func (serv *s) AddPoint(pointData *PointData) (r *CommonResp, err error) {
 	return r, nil
 }
 
-func (serv *s) AddPoints(pointDatas []*PointData) (r *CommonResp, err error) {
+func (c *Client) AddPoints(pointDatas []*PointData) (r *CommonResp, err error) {
 	if len(pointDatas) > 100 {
 		return nil, errors.New("too many points")
 	}
@@ -71,7 +71,7 @@ func (serv *s) AddPoints(pointDatas []*PointData) (r *CommonResp, err error) {
 	if err != nil {
 		return nil, err
 	}
-	respByte, err := serv.Post(trackAddPoints, map[string]string{
+	respByte, err := c.Post(trackAddPoints, map[string]string{
 		"point_list": string(paramsData),
 	})
 	if err != nil {

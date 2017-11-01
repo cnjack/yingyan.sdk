@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-func (serv *s) EntitySearch(query string, filter *EntityListFilter, coordType CoordType, pageIndex, pageSize int) (r *EntitiesListResp, err error) {
+func (c *Client) EntitySearch(query string, filter *EntityListFilter, coordType CoordType, pageIndex, pageSize int) (r *EntitiesListResp, err error) {
 	if coordType == "" {
 		coordType = BaiDuCoordType
 	}
@@ -29,7 +29,7 @@ func (serv *s) EntitySearch(query string, filter *EntityListFilter, coordType Co
 	if filterString != "" {
 		param["filter"] = filterString
 	}
-	respByte, err := serv.Get(entitySearch, param)
+	respByte, err := c.Get(entitySearch, param)
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ func (b *Bounds) ToData() (string, error) {
 }
 
 // 根据矩形地理范围搜索entity，并返回实时位置
-func (serv *s) EntityBoundSearch(bounds *Bounds, filter *EntityListFilter, coordType CoordType, pageIndex, pageSize int) (r *EntitiesListResp, err error) {
+func (c *Client) EntityBoundSearch(bounds *Bounds, filter *EntityListFilter, coordType CoordType, pageIndex, pageSize int) (r *EntitiesListResp, err error) {
 	if coordType == "" {
 		coordType = BaiDuCoordType
 	}
@@ -81,7 +81,7 @@ func (serv *s) EntityBoundSearch(bounds *Bounds, filter *EntityListFilter, coord
 	if filterString != "" {
 		param["filter"] = filterString
 	}
-	respByte, err := serv.Get(entityBoundSearch, param)
+	respByte, err := c.Get(entityBoundSearch, param)
 	if err != nil {
 		return nil, err
 	}
@@ -93,7 +93,7 @@ func (serv *s) EntityBoundSearch(bounds *Bounds, filter *EntityListFilter, coord
 	return r, nil
 }
 
-func (serv *s) EntityRoundSearch(center Point, radius int, filter *EntityListFilter, coordType CoordType, pageIndex, pageSize int) (r *EntitiesListResp, err error) {
+func (c *Client) EntityRoundSearch(center Point, radius int, filter *EntityListFilter, coordType CoordType, pageIndex, pageSize int) (r *EntitiesListResp, err error) {
 	if coordType == "" {
 		coordType = BaiDuCoordType
 	}
@@ -117,7 +117,7 @@ func (serv *s) EntityRoundSearch(center Point, radius int, filter *EntityListFil
 	if filterString != "" {
 		param["filter"] = filterString
 	}
-	respByte, err := serv.Get(entityAroundSearch, param)
+	respByte, err := c.Get(entityAroundSearch, param)
 	if err != nil {
 		return nil, err
 	}

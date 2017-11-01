@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 )
 
-func (serv *s) StayPoint(entityName string, startTime, endTime, stayTime int64, po *ProcessOption, coordType CoordType) (r *StayPointResp, err error) {
+func (c *Client) StayPoint(entityName string, startTime, endTime, stayTime int64, po *ProcessOption, coordType CoordType) (r *StayPointResp, err error) {
 	if coordType == "" {
 		coordType = BaiDuCoordType
 	}
@@ -20,7 +20,7 @@ func (serv *s) StayPoint(entityName string, startTime, endTime, stayTime int64, 
 		"process_option":    po.ToData(),
 		"coord_type_output": string(coordType),
 	}
-	respByte, err := serv.Get(trackGetLatestPoint, param)
+	respByte, err := c.Get(trackGetLatestPoint, param)
 	if err != nil {
 		return nil, err
 	}
